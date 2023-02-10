@@ -1,10 +1,61 @@
-# Saloon SDK Template
-This template repository has been created to help you write SDKs easily. 
+# Flarum API client
 
-## Getting Started
-1. Create a new repository and make sure to select this template
-2. Clone the repository locally
-3. Run the "php configure.php" locally to run through the setup
-4. Start building!
+This library acts like a SDK to the Flarum API of any community.
 
-> To read more about building SDKs with Saloon, see here: https://docs.saloon.dev/the-basics/sdk-style-connectors
+## Install
+
+```
+composer require blomstra/flarum-api-client
+```
+
+## Use
+
+Let's instantiate the client:
+
+```php
+$api = new \Blomstra\FlarumApiClient\FlarumApiClient(baseUrl: 'https://yourflarumdomain.com/api/');
+```
+
+Now read the latest discussions:
+
+```php
+$discussions = $api->discusions()->index();
+
+var_dump($discussions); // A list of the recent discussions.
+```
+
+## Authentication
+
+There are two modes of operation. You can use the client as a Guest or Authenticated user.
+
+- For basic requests you can continue as a Guest.
+- For creation, updates, deletion etc you will need an API token.
+
+An API token needs to be stored inside the table `api_tokens` of your Flarum database. Once generated you can authenticate as follows:
+
+```php
+$auth = new \Blomstra\FlarumApiClient\Auth\Authenticator(token: 'yourtoken');
+$api->authenticate(authenticator: $auth);
+```
+
+In case you wish to authenticate on behalf of another user and your token in the `api_tokens` table has **no** user_id assigned, you can do that with the second argument:
+
+```php
+$auth = new \Blomstra\FlarumApiClient\Auth\Authenticator(token: 'yourtoken', userId: 5);
+$api->authenticate(authenticator: $auth);
+```
+
+You are now able to create discussions, see for instance this full example:
+
+```php
+$api = new \Blomstra\FlarumApiClient\FlarumApiClient(baseUrl: 'https://yourflarumdomain.com/api/');
+$auth = new \Blomstra\FlarumApiClient\Auth\Authenticator(token: 'this-token-does-not-exist');
+$api->authenticate(authenticator: $auth);
+
+$discussion = \Blomstra\FlarumApiClient\Resources\Discussion::with(values: [
+    'title' => 'Welcome to my automated discussions!',
+    'content' => 'The Blomstra Api client rocks 🤘'
+]);
+
+$api->discussions->create(resource: $discussion)
+```

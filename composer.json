@@ -1,19 +1,19 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "blomstra/flarum-api-client",
+    "description": "This is my package flarum-api-client",
     "type": "library",
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/blomstra/flarum-api-client",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "VendorName\\SDK\\": "src/",
-            "VendorName\\SDK\\Tests\\": "tests/"
+            "Blomstra\\FlarumApiClient\\": "src/",
+            "Blomstra\\FlarumApiClient\\Tests\\": "tests/"
         }
     },
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com"
+            "name": "Daniël Klabbers",
+            "email": "daniel@klabbers.email"
         }
     ],
     "minimum-stability": "stable",
@@ -25,7 +25,8 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.5",
         "pestphp/pest": "^1.21",
-        "spatie/ray": "^1.33"
+        "spatie/ray": "^1.33",
+        "symfony/dotenv": "^6.2"
     },
     "scripts": {
         "test": [

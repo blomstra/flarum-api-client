@@ -1,14 +1,11 @@
 <?php
 
-namespace VendorName\SDK\Requests;
+namespace Blomstra\FlarumApiClient\Requests;
 
-use VendorName\SDK\SDK;
+use Blomstra\FlarumApiClient\FlarumApiClient;
 use Sammyjo20\Saloon\Http\SaloonRequest;
 
-class Request extends SaloonRequest
+abstract class Request extends SaloonRequest
 {
-    /**
-     * @var string|null
-     */
-    protected ?string $connector = SDK::class;
+    protected ?string $connector = FlarumApiClient::class;
 }

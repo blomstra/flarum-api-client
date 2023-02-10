@@ -2,7 +2,6 @@
 
 namespace Blomstra\FlarumApiClient;
 
-use Blomstra\FlarumApiClient\Responses\FlarumApiClientResponse;
 use Sammyjo20\Saloon\Http\SaloonConnector;
 use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
 use Blomstra\FlarumApiClient\Requests;

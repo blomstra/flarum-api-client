@@ -2,7 +2,7 @@
 
 namespace Blomstra\FlarumApiClient\Resources;
 
-class User extends Resource
+class User extends RestResource
 {
     public string $type = 'users';
 }

@@ -2,7 +2,7 @@
 
 namespace Blomstra\FlarumApiClient\Resources;
 
-class Post extends Resource
+class Post extends RestResource
 {
     public string $type = 'posts';
 }

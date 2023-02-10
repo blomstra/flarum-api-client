@@ -2,16 +2,18 @@
 
 namespace Blomstra\FlarumApiClient\Requests;
 
-use Blomstra\FlarumApiClient\Data\DataTransferObject;
-use Blomstra\FlarumApiClient\Resources\Resource;
+use Blomstra\FlarumApiClient\Resources\RestResource;
 use Sammyjo20\Saloon\Constants\Saloon;
+use Sammyjo20\Saloon\Traits\Plugins\HasJsonBody;
 
 class RestRequest extends Request
 {
-    protected Resource|null $resource = null;
+    use HasJsonBody;
+
+    protected RestResource|null $resource = null;
     protected string|null $endpoint = null;
 
-    public function for(string|Resource $resource)
+    public function for(string|RestResource $resource)
     {
         if (is_string($resource)) $resource = new $resource;
 
@@ -28,31 +30,44 @@ class RestRequest extends Request
         return $this;
     }
 
-    public function show(int $id)
+    public function show(RestResource|int $resource)
     {
+        $id = $resource instanceof RestResource ? $resource->toArray()['id'] : $resource;
+
         $this->endpoint = "/{$this->resource->type}/$id";
         $this->method = Saloon::GET;
 
         return $this;
     }
 
-    public function create(DataTransferObject $dto)
+    public function create(RestResource $resource)
     {
         $this->endpoint = "/{$this->resource->type}";
         $this->method = Saloon::POST;
-        $this->setData($dto->toArray());
+        $this->setData(['data' => $resource->toArray()]);
 
         return $this;
     }
 
-    public function update(DataTransferObject $dto)
+    public function update(RestResource $resource)
     {
+        $id = $resource->toArray()['id'];
 
+        $this->endpoint = "/{$this->resource->type}/$id";
+        $this->method = Saloon::PATCH;
+        $this->setData(['data' => $resource->toArray()]);
+
+        return $this;
     }
 
-    public function delete(DataTransferObject|int $dto)
+    public function delete(RestResource|int $resource)
     {
+        $id = $resource instanceof RestResource ? $resource->toArray()['id'] : $resource;
 
+        $this->endpoint = "/{$this->resource->type}/$id";
+        $this->method = Saloon::DELETE;
+
+        return $this;
     }
 
     public function defineEndpoint(): string

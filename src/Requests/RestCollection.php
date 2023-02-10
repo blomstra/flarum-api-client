@@ -2,16 +2,16 @@
 
 namespace Blomstra\FlarumApiClient\Requests;
 
-use Blomstra\FlarumApiClient\Data\DataTransferObject;
+use Blomstra\FlarumApiClient\Resources\RestResource;
 use Sammyjo20\Saloon\Http\RequestCollection;
 use Sammyjo20\Saloon\Http\SaloonResponse;
 
 /**
  * @method SaloonResponse index
- * @method SaloonResponse show(int $id)
- * @method SaloonResponse create(DataTransferObject $dto)
- * @method SaloonResponse update(DataTransferObject $dto)
- * @method SaloonResponse delete(DataTransferObject|int $dto)
+ * @method SaloonResponse show(RestResource|int $id)
+ * @method SaloonResponse create(RestResource $resource)
+ * @method SaloonResponse update(RestResource $resource)
+ * @method SaloonResponse delete(RestResource|int $resource)
  */
 abstract class RestCollection extends RequestCollection
 {

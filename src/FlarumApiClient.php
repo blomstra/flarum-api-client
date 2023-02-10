@@ -34,7 +34,10 @@ class FlarumApiClient extends SaloonConnector
 
     public function defaultHeaders(): array
     {
-        return [];
+        return [
+            'Accept' => 'application/vnd.api+json, application/json',
+            'User-Agent' => 'blomstra/flarum-api-client <https://github.com/blomstra/flarum-api-client>'
+        ];
     }
 
     public function defaultConfig(): array

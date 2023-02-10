@@ -1,6 +1,6 @@
 {
     "name": "blomstra/flarum-api-client",
-    "description": "This is my package flarum-api-client",
+    "description": "A Flarum Api client",
     "type": "library",
     "homepage": "https://github.com/blomstra/flarum-api-client",
     "license": "MIT",
@@ -13,7 +13,8 @@
     "authors": [
         {
             "name": "Daniël Klabbers",
-            "email": "daniel@klabbers.email"
+            "email": "daniel@klabbers.email",
+            "homepage": "https://luceos.com"
         }
     ],
     "minimum-stability": "stable",

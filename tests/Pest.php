@@ -16,7 +16,7 @@ function api(bool|int $authorized = false): FlarumApiClient {
             actorId: is_int($authorized) ? $authorized : Arr::get($_ENV, 'API_USER_ID')
         );
 
-        $client->authenticate($auth);
+        $client->authenticate(authenticator: $auth);
     }
 
     return $client;

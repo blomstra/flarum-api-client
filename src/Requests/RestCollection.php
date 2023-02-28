@@ -1,28 +1,30 @@
 <?php
 
-namespace Blomstra\FlarumApiClient\Requests;
+namespace Blomstra\Flarum\Api\Requests;
 
-use Blomstra\FlarumApiClient\Resources\RestResource;
-use Sammyjo20\Saloon\Http\RequestCollection;
-use Sammyjo20\Saloon\Http\SaloonResponse;
+use Blomstra\Flarum\Api\Client;
+use Blomstra\Flarum\Api\Resources\RestResource;
+use Saloon\Http\Response;
 
 /**
- * @method SaloonResponse index
- * @method SaloonResponse show(RestResource|int $id)
- * @method SaloonResponse create(RestResource $resource)
- * @method SaloonResponse update(RestResource $resource)
- * @method SaloonResponse delete(RestResource|int $resource)
+ * @method Response index
+ * @method Response filter(callable $filter)
+ * @method Response show(RestResource|int $id)
+ * @method Response create(RestResource $resource)
+ * @method Response update(RestResource $resource)
+ * @method Response delete(RestResource|int $resource)
  */
-abstract class RestCollection extends RequestCollection
+abstract class RestCollection
 {
     protected string $resource;
+
+    public function __construct(protected Client $connector)
+    {}
 
     public function __call(string $name, array $arguments)
     {
         $request = (new RestRequest)->for(resource: $this->resource);
 
-        return $this->connector
-            ->request($request->$name(...$arguments))
-            ->send();
+        return $this->connector->send($request->$name(...$arguments));
     }
 }

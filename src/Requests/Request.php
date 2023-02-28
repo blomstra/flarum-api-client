@@ -1,11 +1,11 @@
 <?php
 
-namespace Blomstra\FlarumApiClient\Requests;
+namespace Blomstra\Flarum\Api\Requests;
 
-use Blomstra\FlarumApiClient\FlarumApiClient;
-use Sammyjo20\Saloon\Http\SaloonRequest;
+use Blomstra\Flarum\Api\Connector;
+use Saloon\Http\Request as SaloonRequest;
 
 abstract class Request extends SaloonRequest
 {
-    protected ?string $connector = FlarumApiClient::class;
+    protected ?string $connector = Connector::class;
 }

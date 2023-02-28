@@ -1,8 +1,8 @@
 <?php
 
-namespace Blomstra\FlarumApiClient\Requests;
+namespace Blomstra\Flarum\Api\Requests;
 
-use Blomstra\FlarumApiClient\Resources\Discussion;
+use Blomstra\Flarum\Api\Resources\Discussion;
 
 class Discussions extends RestCollection
 {

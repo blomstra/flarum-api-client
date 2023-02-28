@@ -1,31 +1,25 @@
 <?php
 
-namespace Blomstra\FlarumApiClient;
+namespace Blomstra\Flarum\Api;
 
-use Sammyjo20\Saloon\Http\SaloonConnector;
-use Sammyjo20\Saloon\Traits\Plugins\AcceptsJson;
-use Blomstra\FlarumApiClient\Requests;
+use Saloon\Http\Connector as SaloonConnector;
+use Saloon\Traits\Plugins\AcceptsJson;
+use Blomstra\Flarum\Api\Requests;
 
-/**
- * @method Requests\Discussions discussions
- */
-class FlarumApiClient extends SaloonConnector
+class Connector extends SaloonConnector
 {
     use AcceptsJson;
 
-    /**
-     * The requests/services on the FlarumApiClient.
-     *
-     * @var array
-     */
     protected array $requests = [
         'discussions' => Requests\Discussions::class,
+        'posts' => Requests\Posts::class,
+        'users' => Requests\Users::class,
     ];
 
     public function __construct(protected string $baseUrl)
     {}
 
-    public function defineBaseUrl(): string
+    public function resolveBaseUrl(): string
     {
         return $this->baseUrl;
     }

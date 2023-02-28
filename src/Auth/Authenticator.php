@@ -1,25 +1,23 @@
 <?php
 
-namespace Blomstra\FlarumApiClient\Auth;
+namespace Blomstra\Flarum\Api\Auth;
 
-use Sammyjo20\Saloon\Http\SaloonRequest;
-use Sammyjo20\Saloon\Interfaces\AuthenticatorInterface;
+use Saloon\Contracts\Authenticator as SaloonAuthenticator;
+use Saloon\Contracts\PendingRequest;
 
-class Authenticator implements AuthenticatorInterface
+class Authenticator implements SaloonAuthenticator
 {
     public function __construct(protected ?string $token = null, protected ?int $actorId = null)
     {}
 
-    public function set(SaloonRequest $request): void
+    public function set(PendingRequest $pendingRequest): void
     {
         if (! $this->token) return;
 
-        $header = "Token $this->token";
+        $actorId = $this->actorId ?? 1;
 
-        if ($this->actorId) {
-            $header .= "; userId=$this->actorId";
-        }
+        $header = "Token $this->token; userId=$actorId";
 
-        $request->addHeader('Authorization', $header);
+        $pendingRequest->headers()->add('Authorization', $header);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Blomstra\FlarumApiClient\Resources;
+namespace Blomstra\Flarum\Api\Resources;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;

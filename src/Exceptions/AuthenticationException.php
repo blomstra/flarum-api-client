@@ -1,6 +1,6 @@
 <?php
 
-namespace Blomstra\FlarumApiClient\Exceptions;
+namespace Blomstra\Flarum\Api\Exceptions;
 
 use Exception;
 

@@ -1,14 +1,14 @@
 <?php
 
-use Blomstra\FlarumApiClient\Auth\Authenticator;
-use Blomstra\FlarumApiClient\FlarumApiClient;
+use Blomstra\Flarum\Api\Auth\Authenticator;
+use Blomstra\Flarum\Api\Client;
 use Illuminate\Support\Arr;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv)->overload(__DIR__ . '/../.env');
 
-function api(bool|int $authorized = false): FlarumApiClient {
-    $client = new FlarumApiClient(baseUrl: $_ENV['API_URL']);
+function api(bool|int $authorized = false): Client {
+    $client = new Client(baseUrl: $_ENV['API_URL']);
 
     if ($authorized && $_ENV['API_TOKEN']) {
         $auth = new Authenticator(

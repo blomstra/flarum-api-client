@@ -5,7 +5,9 @@ use Blomstra\Flarum\Api\Client;
 use Illuminate\Support\Arr;
 use Symfony\Component\Dotenv\Dotenv;
 
-(new Dotenv)->overload(__DIR__ . '/../.env');
+if (file_exists(__DIR__ . '/../.env')) {
+    (new Dotenv)->overload(__DIR__ . '/../.env');
+}
 
 function api(bool|int $authorized = false): Client {
     $client = new Client(baseUrl: $_ENV['API_URL']);
